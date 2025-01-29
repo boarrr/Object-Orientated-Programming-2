@@ -1,1 +1,4 @@
 /.DS_Store
+
+# Ignore compiled java class files
+*.class
