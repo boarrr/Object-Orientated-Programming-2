@@ -14,4 +14,13 @@ public class Patient {
         patientAge = 0;
         patientSex = "Unknown";
     }
+    
+    private void printName() {
+        System.out.println(patientName);
+    }
+
+    public static void main(String args[]) {
+        Patient patient1 = new Patient("John Smith");
+        patient1.printName();
+    }
 }
