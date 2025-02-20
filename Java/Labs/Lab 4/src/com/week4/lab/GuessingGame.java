@@ -39,7 +39,7 @@ public class GuessingGame {
 
         } while (!checkGuess());
 
-        System.out.println("Congratulations! You guessed the number in " + numGuesses + " guesses!");
+        System.out.println("Congratulations! You guessed the number in " + numGuesses + " guesses!");  
     }
 
     // Compare user guess with the number to guess and return true if they are the same
