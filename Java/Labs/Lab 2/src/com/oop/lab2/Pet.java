@@ -46,21 +46,23 @@ class Pet {
         trained = train;
     }
 
-    // String overload
+    // toString overload
     public String toString() {
         return "The pet named " + getName() + " is a " + getType() + " and has a training status: " + getTrain() + ".";
     }
 
     public void makeNoise() {
+        // Get the type of animal
         String type = getType();
 
+        // Print the noise based off of the type of animal
         if (type == "Dog") {
             System.out.println("Woof");
         }
         else if (type == "Cat") {
             System.out.println("Meow");
         }
-        else {
+        else { // Default case, no animal exists for this sound
             System.out.println("The animal is making no sound");
         }
     }
