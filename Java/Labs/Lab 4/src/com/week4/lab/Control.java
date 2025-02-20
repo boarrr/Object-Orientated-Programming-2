@@ -48,6 +48,7 @@ public class Control {
         scanner.close();
     }    
 
+    // Display the main menu for the game
     private static void displayMenu() {
         System.out.println("\nWelcome to the Number Guessing Game!");
         System.out.println("1. Play Guessing Game");
