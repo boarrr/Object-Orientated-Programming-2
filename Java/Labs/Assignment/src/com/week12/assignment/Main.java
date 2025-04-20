@@ -3,7 +3,6 @@ package com.week12.assignment;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
 
 import com.week12.assignment.Model.DataInstance;
 import com.week12.assignment.Model.NaiveBayes;
@@ -12,7 +11,7 @@ import com.week12.assignment.Utils.CSVReader;
 public class Main {
     public static void main(String[] args) {
         // Read the CSV file
-        List<DataInstance> dataList = CSVReader.readCSV("phone_charging_dataset.csv");
+        List<DataInstance> dataList = CSVReader.readCSV("charging_dataset.csv");
 
         // Shuffle the data to randomize it
         Collections.shuffle(dataList);

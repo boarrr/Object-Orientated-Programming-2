@@ -95,18 +95,20 @@ public class NaiveBayes {
                           (frequencyTable.getLabelCount("yes") + frequencyTable.getLabelCount("no"));
             
             // Calculate the conditional probabilities for each feature
-            // Probability of a feature given a label is the frequency of this feature and label divided by the frequency of the label
-            double condProb1 = (double) frequencyTable.getFeatureGivenLabelCount(1, feature1, label) / 
-                             frequencyTable.getLabelCount(label);
-            
-            double condProb2 = (double) frequencyTable.getFeatureGivenLabelCount(2, feature2, label) / 
-                             frequencyTable.getLabelCount(label);
-            
-            double condProb3 = (double) frequencyTable.getFeatureGivenLabelCount(3, feature3, label) / 
-                             frequencyTable.getLabelCount(label);
-            
-            double condProb4 = (double) frequencyTable.getFeatureGivenLabelCount(4, feature4, label) / 
-                             frequencyTable.getLabelCount(label);
+            // Implemented Laplace smoothing to avoid zero probabilities
+            // https://towardsdatascience.com/laplace-smoothing-in-naive-bayes-algorithm-9c237a8bdece/
+            double condProb1 = (frequencyTable.getFeatureGivenLabelCount(1, feature1, label) + 1.0) / 
+                   (frequencyTable.getLabelCount(label) + 2.0);
+
+            double condProb2 = (frequencyTable.getFeatureGivenLabelCount(2, feature2, label) + 1.0) / 
+                            (frequencyTable.getLabelCount(label) + 2.0);
+
+            double condProb3 = (frequencyTable.getFeatureGivenLabelCount(3, feature3, label) + 1.0) / 
+                            (frequencyTable.getLabelCount(label) + 2.0);
+
+            double condProb4 = (frequencyTable.getFeatureGivenLabelCount(4, feature4, label) + 1.0) / 
+                            (frequencyTable.getLabelCount(label) + 2.0);
+
             
             // Handle zero probabilities with a small value to avoid multiplying by zero
             // This is to avoid the probability being 0 and therefore the whole probability being 0
