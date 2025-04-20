@@ -18,19 +18,19 @@ import com.week12.assignment.Model.DataInstance;
 
 public class CSVReader {
 
-
+    /**
+     * Reads a CSV file and returns a list of DataInstance objects.
+     * 
+     * @param filePath the path to the CSV file
+     * @return a list of DataInstance objects
+     * @throws IOException if the file is not found or cannot be read
+     * @see BufferedReader  
+     * @see FileReader
+     */
     public static List<DataInstance> readCSV(String filePath) {
-        /**
-         * This method reads the CSV file and returns a list of data instances
-         * 
-         * @param filePath the path to the CSV file
-         * @return a list of data instances
-         */
-        
         List<DataInstance> dataList = new ArrayList<>();
 
         // Read the CSV file using the BufferedReader
-        // https://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             
