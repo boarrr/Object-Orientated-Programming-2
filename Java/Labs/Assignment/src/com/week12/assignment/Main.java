@@ -12,6 +12,7 @@ import com.week12.assignment.GUI.PredictorGUI;
 
 public class Main {
     public static void main(String[] args) {
+        
         // Read the CSV file
         List<DataInstance> dataList = CSVReader.readCSV("charging_dataset.csv");
         
