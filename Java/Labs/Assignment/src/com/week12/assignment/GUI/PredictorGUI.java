@@ -64,7 +64,7 @@ public class PredictorGUI extends JFrame {
         // Add tabs
         tabbedPane.addTab("Predictor", createPredictorPanel());
         tabbedPane.addTab("Data Entry", new DataEntryPanel(dataList, classifier, csvFilePath));
-        tabbedPane.addTab("Evaluation", new EvaluationPanel(dataList, classifier));
+        tabbedPane.addTab("Evaluation", new EvaluationPanel(dataList));
         
         // Add the tabbed pane to the frame
         add(tabbedPane);

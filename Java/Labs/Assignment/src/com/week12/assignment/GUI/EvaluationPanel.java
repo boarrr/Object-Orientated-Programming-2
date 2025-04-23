@@ -21,7 +21,6 @@ import java.util.Random;
  */
 public class EvaluationPanel extends JPanel {
     private List<DataInstance> dataList;
-    private NaiveBayes classifier;
     
     private JButton evaluateButton;
     private JLabel statusLabel;
@@ -45,9 +44,8 @@ public class EvaluationPanel extends JPanel {
      * @param dataList the dataset
      * @param classifier the Naive Bayes classifier
      */
-    public EvaluationPanel(List<DataInstance> dataList, NaiveBayes classifier) {
+    public EvaluationPanel(List<DataInstance> dataList) {
         this.dataList = dataList;
-        this.classifier = classifier;
         
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(20, 20, 20, 20));
