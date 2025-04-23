@@ -1,11 +1,14 @@
-package com.week12.assignment.GUI;
+package com.week12.assignment.gui;
 
 import javax.swing.*;
 import javax.swing.border.*;
+
+import com.week12.assignment.model.DataInstance;
+import com.week12.assignment.model.NaiveBayes;
+
 import java.awt.*;
 import java.util.Map;
-
-import com.week12.assignment.Model.NaiveBayes;
+import java.util.List;
 
 public class PredictorGUI extends JFrame {
     private JComboBox<String> timeOfDayComboBox;
@@ -15,11 +18,18 @@ public class PredictorGUI extends JFrame {
     private JLabel resultLabel;
     private JProgressBar probabilityBar;
     private JLabel probabilityLabel;
+    private JLabel trainingStatusLabel;
+    private JButton predictButton;
     
     private NaiveBayes classifier;
+    private List<DataInstance> dataList;
+    private String csvFilePath;
+    
     private final Color HEADER_COLOR = new Color(50, 100, 150);
     private final Color BG_COLOR = new Color(240, 240, 250);
     private final Color ACCENT_COLOR = new Color(100, 180, 220);
+    private final Color SUCCESS_COLOR = new Color(50, 150, 50);
+    private final Color WARNING_COLOR = new Color(200, 120, 50);
     private final Font TITLE_FONT = new Font("Arial", Font.BOLD, 18);
     private final Font HEADER_FONT = new Font("Arial", Font.BOLD, 14);
     private final Font REGULAR_FONT = new Font("Arial", Font.PLAIN, 12);
@@ -27,10 +37,14 @@ public class PredictorGUI extends JFrame {
     /**
      * Constructor for the PredictorGUI
      * 
-     * @param classifier the trained Naive Bayes classifier
+     * @param classifier the untrained Naive Bayes classifier
+     * @param dataList the dataset to be used for training
+     * @param csvFilePath the path to the CSV file
      */
-    public PredictorGUI(NaiveBayes classifier) {
+    public PredictorGUI(NaiveBayes classifier, List<DataInstance> dataList, String csvFilePath) {
         this.classifier = classifier;
+        this.dataList = dataList;
+        this.csvFilePath = csvFilePath;
         setupUI();
     }
     
@@ -39,11 +53,31 @@ public class PredictorGUI extends JFrame {
         // Set window title and size
         setTitle("Phone Charging Predictor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 500);
+        setSize(650, 600);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
         
-        // Create the main content panel
+        // Create a tabbed pane for multiple levels of functionality
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.setFont(HEADER_FONT);
+        
+        // Add tabs
+        tabbedPane.addTab("Predictor", createPredictorPanel());
+        tabbedPane.addTab("Data Entry", new DataEntryPanel(dataList, classifier, csvFilePath));
+        tabbedPane.addTab("Evaluation", new EvaluationPanel(dataList, classifier));
+        
+        // Add the tabbed pane to the frame
+        add(tabbedPane);
+        
+        setVisible(true);
+    }
+    
+    /**
+     * Creates the Predictor tab panel that contains all prediction functionality for the program
+     * 
+     * @return the panel containing the prediction components
+     */
+    private JPanel createPredictorPanel() {
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         mainPanel.setBackground(BG_COLOR);
@@ -52,10 +86,7 @@ public class PredictorGUI extends JFrame {
         mainPanel.add(createInputPanel(), BorderLayout.CENTER);
         mainPanel.add(createResultPanel(), BorderLayout.SOUTH);
         
-        // Add the main panel to the frame
-        setContentPane(mainPanel);
-        
-        setVisible(true);
+        return mainPanel;
     }
     
     /**
@@ -97,7 +128,7 @@ public class PredictorGUI extends JFrame {
         inputPanel.add(createFeaturePanel("Charger Connected:", chargerConnectedComboBox));
         
         // Screen On
-        screenOnComboBox = new JComboBox<>(new String[] {"Yes", "No"});
+        screenOnComboBox = new JComboBox<>(new String[] {"On", "Off"});
         inputPanel.add(createFeaturePanel("Screen On:", screenOnComboBox));
         
         // Battery Level
@@ -144,16 +175,24 @@ public class PredictorGUI extends JFrame {
             new EmptyBorder(10, 10, 10, 10)
         ));
         
-        // Create the predict button
-        JButton predictButton = new JButton("Predict");
+        // Create the buttons
+        predictButton = new JButton("Predict");
         predictButton.setFont(HEADER_FONT);
         predictButton.setBackground(ACCENT_COLOR);
         predictButton.setForeground(Color.BLACK);
         predictButton.setFocusPainted(true);
         predictButton.addActionListener(e -> predict());
+        predictButton.setEnabled(false); // Disabled until model is trained
+        
+        JButton trainButton = new JButton("Train Model");
+        trainButton.setFont(HEADER_FONT);
+        trainButton.setBackground(new Color(80, 160, 80));
+        trainButton.setForeground(Color.WHITE);
+        trainButton.setFocusPainted(true);
+        trainButton.addActionListener(e -> trainModel());
         
         // Create the result displays
-        JPanel displayPanel = new JPanel(new GridLayout(3, 1, 5, 10));
+        JPanel displayPanel = new JPanel(new GridLayout(4, 1, 5, 10));
         displayPanel.setBackground(BG_COLOR);
         
         resultLabel = new JLabel("Prediction: ");
@@ -168,14 +207,20 @@ public class PredictorGUI extends JFrame {
         probabilityBar.setValue(0);
         probabilityBar.setForeground(ACCENT_COLOR);
         
+        trainingStatusLabel = new JLabel("Model is not trained. Please train the model first.");
+        trainingStatusLabel.setFont(REGULAR_FONT);
+        trainingStatusLabel.setForeground(WARNING_COLOR);
+        
         displayPanel.add(resultLabel);
         displayPanel.add(probabilityLabel);
         displayPanel.add(probabilityBar);
+        displayPanel.add(trainingStatusLabel);
         
-        // Add a panel for the predict button with some padding
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        // Add a panel for the buttons with some padding
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
         buttonPanel.setBackground(BG_COLOR);
         buttonPanel.add(predictButton);
+        buttonPanel.add(trainButton);
         
         resultPanel.add(buttonPanel, BorderLayout.NORTH);
         resultPanel.add(displayPanel, BorderLayout.CENTER);
@@ -184,10 +229,59 @@ public class PredictorGUI extends JFrame {
     }
     
     /**
-     * Predict the charging status based on the user's input and the classifier
+     * Trains the model with the loaded dataset, utilises SwingWorker to prevent freezing
+     * Runs the training in the background and updates the status label when done
+     * @see SwingWorker
+     * @throws Exception if the training fails or the dataset is empty
+     */
+    private void trainModel() {
+        // Update the status label
+        trainingStatusLabel.setText("Training model...");
+        trainingStatusLabel.setForeground(HEADER_COLOR);
+        
+        // Use SwingWorker to avoid freezing the UI during training
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Train the classifier
+                classifier.train(dataList);
+                return null;
+            }
+            
+            @Override
+            protected void done() {
+                // Update the status label when done, showing dataset size
+                trainingStatusLabel.setText("Model trained successfully with " + dataList.size() + " data instances!");
+                trainingStatusLabel.setForeground(SUCCESS_COLOR);
+                
+                // Enable the predict button now that the model is trained
+                predictButton.setEnabled(true);
+                
+                // Clear the previous prediction
+                resultLabel.setText("Prediction: ");
+                probabilityLabel.setText("Probability: ");
+                probabilityBar.setValue(0);
+                probabilityBar.setForeground(ACCENT_COLOR);
+            }
+        };
+        
+        worker.execute();
+    }
+    
+    /**
+     * Predicts the charging status based on the user's input and the classifier
      * @see NaiveBayes
+     * @throws Exception if the model is not trained, prompts the user to train the model first
      */
     private void predict() {
+        if (!classifier.isTrained()) {
+            JOptionPane.showMessageDialog(this, 
+                "Please train the model first by clicking the 'Train Model' button.", 
+                "Model Not Trained", 
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         String timeOfDay = (String) timeOfDayComboBox.getSelectedItem();
         String chargerConnected = (String) chargerConnectedComboBox.getSelectedItem();
         String screenOn = (String) screenOnComboBox.getSelectedItem();
@@ -206,7 +300,7 @@ public class PredictorGUI extends JFrame {
             resultLabel.setText("Prediction: Phone is not charging");
         }
         
-        // Display probability information
+        // Display the probability information
         double probability = probabilities.get(prediction) * 100;
         probabilityLabel.setText(String.format("Probability: %.2f%%", probability));
         probabilityBar.setValue((int) probability);

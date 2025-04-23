@@ -6,7 +6,7 @@
  * Date: 20-04-2025
  */
 
-package com.week12.assignment.Model;
+package com.week12.assignment.model;
 
 import java.util.List;
 import java.util.Map;
@@ -108,23 +108,7 @@ public class NaiveBayes {
 
             double condProb4 = (frequencyTable.getFeatureGivenLabelCount(4, feature4, label) + 1.0) / 
                             (frequencyTable.getLabelCount(label) + 2.0);
-
-            
-            // Handle zero probabilities with a small value to avoid multiplying by zero
-            // This is to avoid the probability being 0 and therefore the whole probability being 0
-            if (condProb1 == 0) {
-                condProb1 = 0.001;
-            }
-            if (condProb2 == 0) {
-                condProb2 = 0.001;
-            }
-            if (condProb3 == 0) {
-                condProb3 = 0.001;
-            }
-            if (condProb4 == 0) {
-                condProb4 = 0.001;
-            }
-            
+    
             // Calculate the final probability using Bayes' theorem
             // https://www.geeksforgeeks.org/bayes-theorem/?ref=rp
             double probability = prior * condProb1 * condProb2 * condProb3 * condProb4;
@@ -132,10 +116,9 @@ public class NaiveBayes {
             // Store the probability for this class
             probabilities.put(label, probability);
         }
-        
-        // Ensure that the probabilities are valid and add up to 1
-        double total = probabilities.values().stream().mapToDouble(Double::doubleValue).sum();
-        
+    
+        // Ensure the probabilities add up to 1
+        double total = probabilities.values().stream().mapToDouble(Double::doubleValue).sum();    
         if (total > 0) {
             for (String label : probabilities.keySet()) {
                 probabilities.put(label, probabilities.get(label) / total);

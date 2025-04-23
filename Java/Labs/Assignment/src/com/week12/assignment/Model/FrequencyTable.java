@@ -6,7 +6,7 @@
  * Date: 20-04-2025
  */
 
-package com.week12.assignment.Model;
+package com.week12.assignment.model;
 
 import java.util.HashMap;
 import java.util.Map;

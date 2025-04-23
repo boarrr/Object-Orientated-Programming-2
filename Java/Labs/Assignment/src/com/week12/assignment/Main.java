@@ -1,28 +1,36 @@
 package com.week12.assignment;
 
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
 import javax.swing.SwingUtilities;
+import java.io.InputStream;
+import java.io.FileInputStream;
 
-import com.week12.assignment.Model.DataInstance;
-import com.week12.assignment.Model.NaiveBayes;
-import com.week12.assignment.Utils.CSVReader;
-import com.week12.assignment.GUI.PredictorGUI;
+import com.week12.assignment.utils.CSVReader;
+import com.week12.assignment.gui.PredictorGUI;
+import com.week12.assignment.model.DataInstance;
+import com.week12.assignment.model.NaiveBayes;
 
 public class Main {
     public static void main(String[] args) {
-        
-        // Read the CSV file
-        List<DataInstance> dataList = CSVReader.readCSV("charging_dataset.csv");
-        
-        // Create and train the Naive Bayes classifier
-        NaiveBayes classifier = new NaiveBayes();
-        classifier.train(dataList);
-        
-        // Create and show the GUI
-        SwingUtilities.invokeLater(() -> {
-            new PredictorGUI(classifier);
-        });
+        try {
+            // Use relative path to the CSV file
+            String csvFilePath = "src/com/week12/assignment/data/charging_dataset.csv";  
+
+            // Read CSV from file input stream
+            InputStream inputStream = new FileInputStream(csvFilePath);
+            List<DataInstance> dataList = CSVReader.readCSV(inputStream);
+
+            // Create the Naive Bayes classifier
+            NaiveBayes classifier = new NaiveBayes();
+
+            // Create and show the GUI
+            SwingUtilities.invokeLater(() -> {
+                new PredictorGUI(classifier, dataList, csvFilePath);
+            });
+
+        } catch (Exception e) {
+            System.err.println("Error initializing application: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
