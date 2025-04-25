@@ -3,7 +3,9 @@
 ## Project Overview
 This application is a Naive Bayes GUI predictor that allows users to predict if a phone is charging based on a predetermined dataset. The application successfully implements the Naive Bayes classifier algorithm to analyze phone charging patterns based on specific features: time of day, charger connection status, screen status, and battery level.
 
-The dataset used to train the predictor was generated using ChatGPT 4o
+The dataset used to train the predictor was generated using ChatGPT 4o.
+
+Throughout the project, I utilised Javadoc practices to document every method in the program. I wanted to get practice with docstrings, and utilise them more in my code.
 
 ## Frequency Table for the Dataset
 The frequency table shows the counts for different feature combinations in the dataset:
