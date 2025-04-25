@@ -1,14 +1,11 @@
-/*
- * DataInstance.java is a class that represents the data instances of the dataset.
- * It stores the features and the label of each data instance as it is loaded
- * It provides getters to pull the features and label when needed
- * 
- * Author: Ryan Pitman
- * Date: 20-04-2025
- */
-
 package com.week12.assignment.model;
 
+/**
+ * DataInstance class which represents the data instances of the dataset.
+ * This class stores the features and the label of each data instance as it is loaded.
+ * It provides getters to pull the features and label when needed.
+ * @author Ryan Pitman
+ */
 public class DataInstance {
     private String feature1;
     private String feature2;
@@ -79,7 +76,7 @@ public class DataInstance {
     }
 
     /**
-     * Override the toString method to print the data instance.
+     * Overrides the toString method to print the data instance.
      * 
      * @return a string representation of the data instance
      */

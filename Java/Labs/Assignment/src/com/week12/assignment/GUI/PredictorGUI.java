@@ -10,6 +10,15 @@ import java.awt.*;
 import java.util.Map;
 import java.util.List;
 
+/**
+ * PredictorGUI class extends JFrame to create the GUI for the Naive Bayes Predictor.
+ * Uses a tabbed pane to organise the different functionalities of the program.
+ * The Predictor tab contains the functionality to make predictions.
+ * The Data Entry tab allows the user to add new data instances to the training dataset.
+ * The Evaluation tab allows the user to assess the classifier's performance using a stratified train-test split.
+ * 
+ * @author Ryan Pitman
+ */
 public class PredictorGUI extends JFrame {
     private JComboBox<String> timeOfDayComboBox;
     private JComboBox<String> chargerConnectedComboBox;
@@ -48,7 +57,10 @@ public class PredictorGUI extends JFrame {
         setupUI();
     }
     
-    // Set up the GUI
+    /**
+     * Sets up the GUI for the program, sets title and size of the window.
+     * Creates a tabbed pane to organise the different functionalities of the program.
+     */
     private void setupUI() {
         // Set window title and size
         setTitle("Phone Charging Predictor");
@@ -90,7 +102,7 @@ public class PredictorGUI extends JFrame {
     }
     
     /**
-     * Create the title panel
+     * Creates the title panel of the program.
      * 
      * @return the title panel
      */
@@ -107,7 +119,7 @@ public class PredictorGUI extends JFrame {
     }
     
     /**
-     * Create the input panel
+     * Creates the input panel of the predictor tab.
      * 
      * @return the input panel
      */
@@ -163,7 +175,8 @@ public class PredictorGUI extends JFrame {
     }
     
     /**
-     * Create the result panel
+     * Creates the result panel for the predictor tab.
+     * Adds the prediction results and buttons to the panel.
      * 
      * @return the result panel
      */

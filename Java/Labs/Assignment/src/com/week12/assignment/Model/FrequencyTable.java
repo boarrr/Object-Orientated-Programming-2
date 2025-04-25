@@ -1,17 +1,15 @@
-/*
- * FrequencyTable.java will be used to store the frequency of each feature in the dataset
- * This will be used for the Naive Bayes Classifier
- * 
- * Author: Ryan Pitman
- * Date: 20-04-2025
- */
-
 package com.week12.assignment.model;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
+/**
+ * FrequencyTable class that creates a frequency table from a given list of data instances.
+ * Utilises a hash map to store the frequency of each feature.
+ * 
+ * @author Ryan Pitman
+ */
 public class FrequencyTable {
     private Map<String, Integer> table = new HashMap<>();
 
@@ -42,7 +40,11 @@ public class FrequencyTable {
         }
     }
     
-    // Increments the count for the given key in the frequency table
+    /**
+     * Increments the count for a given key within the frequency table.
+     * 
+     * @param key the key to increment
+     */
     private void increment(String key) {
         table.put(key, table.getOrDefault(key, 0) + 1);
     }

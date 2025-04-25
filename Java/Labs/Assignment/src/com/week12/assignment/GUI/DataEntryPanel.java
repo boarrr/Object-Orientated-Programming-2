@@ -14,7 +14,8 @@ import java.util.List;
 
 /**
  * Panel for the Data Entry tab that allows users to add new data to the dataset
- * This tab will allow the user to recalculate the model with the updated dataset
+ * This tab will allow the user to enter new data instances to the dataset.
+ * The user can then recalculate the model with the updated dataset.
  * @see NaiveBayes
  */
 public class DataEntryPanel extends JPanel {
@@ -196,7 +197,7 @@ public class DataEntryPanel extends JPanel {
     }
     
     /**
-     * Adds a new data entry to the dataset and CSV file.
+     * Adds a new data entry to the dataset and CSV file using appendToCSV method.
      */
     private void addDataEntry() {
         try {

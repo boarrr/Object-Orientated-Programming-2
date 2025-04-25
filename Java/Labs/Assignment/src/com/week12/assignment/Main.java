@@ -10,6 +10,13 @@ import com.week12.assignment.gui.PredictorGUI;
 import com.week12.assignment.model.DataInstance;
 import com.week12.assignment.model.NaiveBayes;
 
+/**
+ * Main class for the Naive Bayes Predictor.
+ * Initializes the application and creates the GUI.
+ * 
+ * @author Ryan Pitman
+ * @throws Exception if the CSV file is not found or cannot be read
+ */
 public class Main {
     public static void main(String[] args) {
         try {

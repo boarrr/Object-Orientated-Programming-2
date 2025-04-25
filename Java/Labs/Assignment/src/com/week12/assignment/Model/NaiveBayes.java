@@ -1,23 +1,21 @@
-/*
- * NaiveBayes.java implements the Naive Bayes classifier algorithm for this assignment
- * It utilise the frequency table to calculate probabilities and make predictions.
- * 
- * Author: Ryan Pitman
- * Date: 20-04-2025
- */
-
 package com.week12.assignment.model;
 
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * NaiveBayes class which implements the Naive Bayes classifier algorithm.
+ * This class utilises the frequency table to calculate probabilities and make predictions.
+ * 
+ * @author Ryan Pitman
+ */
 public class NaiveBayes {
     private FrequencyTable frequencyTable;
     private boolean isTrained = false;
     
     /**
-     * Constructor initializes the frequency table.
+     * This constructor initialises the frequency table.
      */
     public NaiveBayes() {
         this.frequencyTable = new FrequencyTable();
