@@ -29,14 +29,17 @@ The application features a user-friendly GUI with three main tabs:
 
 ### Predictor Tab
 ![Predictor Tab](src/com/week12/assignment/data/preview/predictor.png)
+
 *The Predictor tab allows users to select their feature values and get predictions on whether the phone is charging or not.*
 
 ### Data Entry Tab
 ![Data Entry Tab](src/com/week12/assignment/data/preview/data_entry.png)
+
 *The Data Entry tab enables users to add new data instances to the original training dataset.*
 
 ### Evaluation Tab
 ![Evaluation Tab](src/com/week12/assignment/data/preview/evaluation.png)
+
 *The Evaluation tab allows users to assess the classifier's performance using a stratified train-test splits.*
 
 
