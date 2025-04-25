@@ -53,46 +53,46 @@ Throughout the project, I tried to stick to Java convention as much as possible,
 ### Main Package: com.week12.assignment
 
 #### 1. Main.java
-The entry point of the application that initializes the classifier, loads the dataset, and then launches the GUI.
+   - The entry point of the application that initializes the classifier, loads the dataset, and then launches the GUI.
 
 ### Model Package: com.week12.assignment.model
 
 #### 2. NaiveBayes.java
-Implements the Naive Bayes classifier algorithm with methods for training, prediction, and evaluation.
-Later on I implemented Laplace smoothing, which is common in Naive Bayes implementations to improve my models accuracy.
+   - Implements the Naive Bayes classifier algorithm with methods for training, prediction, and evaluation.
+   - Later on I implemented Laplace smoothing, which is common in Naive Bayes implementations to improve my models accuracy.
 
 #### 3. DataInstance.java
-Represents a single data instance with four features (TimeOfDay, ChargerConnected, ScreenOn, BatteryLevel) and a class label (PhoneIsCharging).
-I designed this class to make it easy to manipulate and process the data across the application.
+   - Represents a single data instance with four features (TimeOfDay, ChargerConnected, ScreenOn, BatteryLevel) and a class label (PhoneIsCharging).
+   - I designed this class to make it easy to manipulate and process the data across the application.
 
 #### 4. FrequencyTable.java
-Stores and manages the frequency counts of features in the dataset, which are used by the Naive Bayes algorithm to calculate probabilities.
-This class uses a HashMap implementation to efficiently store and retrieve frequency data.
+   - Stores and manages the frequency counts of features in the dataset, which are used by the Naive Bayes algorithm to calculate probabilities.
+   - This class uses a HashMap implementation to efficiently store and retrieve frequency data.
 
 ### GUI Package: com.week12.assignment.gui
 
 #### 5. PredictorGUI.java
-The main GUI window with tabbed panels for prediction, data entry, and evaluation functions.
-I used Java Swing to create a clean and intuitive interface for users to interact with the predictor.
+   - The main GUI window with tabbed panels for prediction, data entry, and evaluation functions.
+   - I used Java Swing to create a clean and intuitive interface for users to interact with the predictor.
 
 #### 6. DataEntryPanel.java
-Allows users to add new data instances to the dataset and save them to the CSV file.
-This panel provides a simple form for entering new data points to expand the training set.
+   - Allows users to add new data instances to the dataset and save them to the CSV file.
+   - This panel provides a simple form for entering new data points to expand the training set.
 
 #### 7. EvaluationPanel.java
-Provides functionality to evaluate the classifier using stratified train-test splits and then visualizes the results.
-I chose to stratify the data with as much of an even mix as possible of yes and no permutations, and decided on a 75% train and 25% test split.
+   - Provides functionality to evaluate the classifier using stratified train-test splits and then visualizes the results.
+   - I chose to stratify the data with as much of an even mix as possible of yes and no permutations, and decided on a 75% train and 25% test split.
 
 ### Utils Package: com.week12.assignment.utils
 
 #### 8. CSVReader.java
-Handles loading and parsing the CSV dataset file, this class utilises an inputStream and BufferedReader to load the data into DataInstances
+   - Handles loading and parsing the CSV dataset file, this class utilises an inputStream and BufferedReader to load the data into DataInstances
 
 ### Data Package: com.week12.assignment.data
 
 #### 9. charging_dataset.csv
-Contains the dataset with 201 instances of phone charging data.
-This dataset was carefully crafted to provide meaningful patterns for the Naive Bayes algorithm to learn from.
+   - Contains the dataset with 201 instances of phone charging data.
+   - This dataset was carefully crafted to provide meaningful patterns for the Naive Bayes algorithm to learn from.
 
 ## Functionality Included
 
