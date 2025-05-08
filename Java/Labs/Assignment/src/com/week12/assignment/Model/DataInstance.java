@@ -1,4 +1,4 @@
-package com.week12.assignment.model;
+package com.week12.assignment.Model;
 
 /**
  * DataInstance class which represents the data instances of the dataset.

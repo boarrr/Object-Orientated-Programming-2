@@ -1,10 +1,10 @@
-package com.week12.assignment.gui;
+package com.week12.assignment.GUI;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
-import com.week12.assignment.model.DataInstance;
-import com.week12.assignment.model.NaiveBayes;
+import com.week12.assignment.Model.DataInstance;
+import com.week12.assignment.Model.NaiveBayes;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -143,7 +143,7 @@ public class EvaluationPanel extends JPanel {
         evaluateButton = new JButton("Evaluate Model");
         evaluateButton.setFont(HEADER_FONT);
         evaluateButton.setBackground(new Color(80, 160, 80));
-        evaluateButton.setForeground(Color.WHITE);
+        evaluateButton.setForeground(Color.BLACK);
         evaluateButton.addActionListener(e -> evaluateModel());
         
         buttonPanel.add(evaluateButton);

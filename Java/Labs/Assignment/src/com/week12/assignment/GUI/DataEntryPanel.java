@@ -1,10 +1,10 @@
-package com.week12.assignment.gui;
+package com.week12.assignment.GUI;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
-import com.week12.assignment.model.DataInstance;
-import com.week12.assignment.model.NaiveBayes;
+import com.week12.assignment.Model.DataInstance;
+import com.week12.assignment.Model.NaiveBayes;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -147,7 +147,7 @@ public class DataEntryPanel extends JPanel {
         addDataButton = new JButton("Add Data Entry");
         addDataButton.setFont(HEADER_FONT);
         addDataButton.setBackground(new Color(50, 150, 50));
-        addDataButton.setForeground(Color.WHITE);
+        addDataButton.setForeground(Color.BLACK);
         addDataButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -158,7 +158,7 @@ public class DataEntryPanel extends JPanel {
         recalculateButton = new JButton("Recalculate Model");
         recalculateButton.setFont(HEADER_FONT);
         recalculateButton.setBackground(new Color(80, 80, 200));
-        recalculateButton.setForeground(Color.WHITE);
+        recalculateButton.setForeground(Color.BLACK);
         recalculateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

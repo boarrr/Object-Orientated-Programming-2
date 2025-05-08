@@ -1,10 +1,10 @@
-package com.week12.assignment.gui;
+package com.week12.assignment.GUI;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
-import com.week12.assignment.model.DataInstance;
-import com.week12.assignment.model.NaiveBayes;
+import com.week12.assignment.Model.DataInstance;
+import com.week12.assignment.Model.NaiveBayes;
 
 import java.awt.*;
 import java.util.Map;
@@ -166,7 +166,7 @@ public class PredictorGUI extends JFrame {
         label.setForeground(HEADER_COLOR);
         
         comboBox.setFont(REGULAR_FONT);
-        comboBox.setBackground(Color.WHITE);
+        comboBox.setBackground(Color.BLACK);
         
         panel.add(label, BorderLayout.WEST);
         panel.add(comboBox, BorderLayout.CENTER);
@@ -200,7 +200,7 @@ public class PredictorGUI extends JFrame {
         JButton trainButton = new JButton("Train Model");
         trainButton.setFont(HEADER_FONT);
         trainButton.setBackground(new Color(80, 160, 80));
-        trainButton.setForeground(Color.WHITE);
+        trainButton.setForeground(Color.BLACK);
         trainButton.setFocusPainted(true);
         trainButton.addActionListener(e -> trainModel());
         

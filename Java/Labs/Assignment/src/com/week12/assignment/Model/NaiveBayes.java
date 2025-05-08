@@ -1,4 +1,4 @@
-package com.week12.assignment.model;
+package com.week12.assignment.Model;
 
 import java.util.List;
 import java.util.Map;

@@ -6,13 +6,13 @@
  * Date: 20-04-2025
  */
 
- package com.week12.assignment.utils;
+ package com.week12.assignment.Utils;
 
  import java.io.*;
  import java.util.ArrayList;
  import java.util.List;
 
-import com.week12.assignment.model.DataInstance;
+import com.week12.assignment.Model.DataInstance;
  
 public class CSVReader {
     

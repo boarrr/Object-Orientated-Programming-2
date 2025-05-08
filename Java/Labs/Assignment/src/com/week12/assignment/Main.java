@@ -5,11 +5,10 @@ import javax.swing.SwingUtilities;
 import java.io.InputStream;
 import java.io.FileInputStream;
 
-import com.week12.assignment.utils.CSVReader;
-import com.week12.assignment.gui.PredictorGUI;
-import com.week12.assignment.model.DataInstance;
-import com.week12.assignment.model.NaiveBayes;
-
+import com.week12.assignment.GUI.PredictorGUI;
+import com.week12.assignment.Model.DataInstance;
+import com.week12.assignment.Model.NaiveBayes;
+import com.week12.assignment.Utils.CSVReader;
 /**
  * Main class for the Naive Bayes Predictor.
  * Initializes the application and creates the GUI.
